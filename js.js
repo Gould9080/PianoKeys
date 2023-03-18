@@ -14,14 +14,25 @@ const a5 = document.querySelector('#a5');
 const b5 = document.querySelector('#b5');
 const c6 = document.querySelector('#c6');
 
+
+//https://stackoverflow.com/questions/879152/how-do-i-make-javascript-beep
 var audioCtx = new (window.AudioContext || window.webkitAudioContext || window.audioContext);
 
-// Close Encounters Notes
-// beep(500, 587); - d5
-// beep(500, 659); - e5 
-// beep(500, 523); - c5
-// beep(500, 262); - C4
-// beep(500, 392); - G4
+function beep(duration, frequency, volume, type, callback) {
+    var oscillator = audioCtx.createOscillator();
+    var gainNode = audioCtx.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    if (volume) { gainNode.gain.value = volume; }
+    if (frequency) { oscillator.frequency.value = frequency; }
+    if (type) { oscillator.type = type; }
+    if (callback) { oscillator.onended = callback; }
+
+    oscillator.start(audioCtx.currentTime);
+    oscillator.stop(audioCtx.currentTime + ((duration || 500) / 1000));
+};
 
 
 // beep(500, 262); - C4
@@ -49,25 +60,6 @@ var audioCtx = new (window.AudioContext || window.webkitAudioContext || window.a
 // beep(500, 932); - a#5 
 // beep(500, 988); - b5 
 // beep(500, 1047); - C6 
-
-
-//https://stackoverflow.com/questions/879152/how-do-i-make-javascript-beep
-function beep(duration, frequency, volume, type, callback) {
-    var oscillator = audioCtx.createOscillator();
-    var gainNode = audioCtx.createGain();
-
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    if (volume) { gainNode.gain.value = volume; }
-    if (frequency) { oscillator.frequency.value = frequency; }
-    if (type) { oscillator.type = type; }
-    if (callback) { oscillator.onended = callback; }
-
-    oscillator.start(audioCtx.currentTime);
-    oscillator.stop(audioCtx.currentTime + ((duration || 500) / 1000));
-};
-
 
 c4.addEventListener('click', function () {
     beep(500, 262);
@@ -115,3 +107,53 @@ c6.addEventListener('click', function () {
     beep(500, 1047);
 });
 
+
+
+document.addEventListener('keydown', function (event) {
+    playSound(event.key)
+})
+
+function playSound(key) {
+    switch (key) {
+        case "a":
+            beep(500, 262);
+            break;
+
+        case "s":
+            beep(500, 294);
+            break;
+
+        case "d":
+            beep(500, 330);
+            break;
+
+        case "f":
+            beep(500, 349);
+            break;
+
+        case "g":
+            beep(500, 392);
+            break;
+
+        case "h":
+            beep(500, 440);
+            break;
+
+        case "j":
+            beep(500, 494);
+            break;
+
+        case "k":
+            beep(500, 523);
+            break;
+
+        case "l":
+            beep(500, 587);
+            break;
+
+        case ";":
+            beep(500, 659);
+            break;
+
+    }
+}
