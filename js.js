@@ -18,7 +18,7 @@ const c6 = document.querySelector('#c6');
 //https://stackoverflow.com/questions/879152/how-do-i-make-javascript-beep
 var audioCtx = new (window.AudioContext || window.webkitAudioContext || window.audioContext);
 
-function beep(duration, frequency, volume, type, callback) {
+function beep(frequency, duration = 250, volume, type, callback) {
     var oscillator = audioCtx.createOscillator();
     var gainNode = audioCtx.createGain();
 
@@ -32,6 +32,22 @@ function beep(duration, frequency, volume, type, callback) {
 
     oscillator.start(audioCtx.currentTime);
     oscillator.stop(audioCtx.currentTime + ((duration || 500) / 1000));
+};
+
+function beepStart(frequency) {
+    var oscillator = audioCtx.createOscillator();
+    var gainNode = audioCtx.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.start(audioCtx.currentTime);
+};
+
+function beepStop(frequency) {
+    var oscillator = audioCtx.createOscillator();
+    var gainNode = audioCtx.createGain();
+
+    oscillator.stop(audioCtx.currentTime);
 };
 
 
@@ -61,98 +77,104 @@ function beep(duration, frequency, volume, type, callback) {
 // beep(500, 988); - b5 
 // beep(500, 1047); - C6 
 
-c4.addEventListener('click', function () {
-    beep(500, 262);
-});
-d4.addEventListener('click', function () {
-    beep(500, 294);
-});
-e4.addEventListener('click', function () {
-    beep(500, 330);
-});
-f4.addEventListener('click', function () {
-    beep(500, 349);
-});
-g4.addEventListener('click', function () {
-    beep(500, 392);
-});
-a4.addEventListener('click', function () {
-    beep(500, 440);
-});
-b4.addEventListener('click', function () {
-    beep(500, 494);
-});
-c5.addEventListener('click', function () {
-    beep(500, 523);
-});
-d5.addEventListener('click', function () {
-    beep(500, 587);
-});
-e5.addEventListener('click', function () {
-    beep(500, 659);
-});
-f5.addEventListener('click', function () {
-    beep(500, 698);
-});
-g5.addEventListener('click', function () {
-    beep(500, 784);
-});
-a5.addEventListener('click', function () {
-    beep(500, 880);
-});
-b5.addEventListener('click', function () {
-    beep(500, 988);
-});
-c6.addEventListener('click', function () {
-    beep(500, 1047);
+
+document.addEventListener('DOMContentLoaded', () => {
+    // When the DOM Content has loaded attach a click listener
+
+    c4.addEventListener('click', function () {
+        beep(262);  // should default to 250ms
+    });
+
+    d4.addEventListener('click', function () {
+        beep(294);
+    });
+    e4.addEventListener('click', function () {
+        beep(330);
+    });
+    f4.addEventListener('click', function () {
+        beep(349);
+    });
+    g4.addEventListener('click', function () {
+        beep(392);
+    });
+    a4.addEventListener('click', function () {
+        beep(440);
+    });
+    b4.addEventListener('click', function () {
+        beep(494);
+    });
+    c5.addEventListener('click', function () {
+        beep(523);
+    });
+    d5.addEventListener('click', function () {
+        beep(587);
+    });
+    e5.addEventListener('click', function () {
+        beep(659);
+    });
+    f5.addEventListener('click', function () {
+        beep(698);
+    });
+    g5.addEventListener('click', function () {
+        beep(784);
+    });
+    a5.addEventListener('click', function () {
+        beep(880);
+    });
+    b5.addEventListener('click', function () {
+        beep(988);
+    });
+    c6.addEventListener('click', function () {
+        beep(1047);
+    });
+
+    document.addEventListener('keydown', function (event) {
+        playSound(event.key)
+    })
+
 });
 
-
-
-document.addEventListener('keydown', function (event) {
-    playSound(event.key)
-})
 
 function playSound(key) {
     switch (key) {
         case "a":
-            beep(500, 262);
+            beep(262);
             break;
 
         case "s":
-            beep(500, 294);
+            beep(294);
             break;
 
         case "d":
-            beep(500, 330);
+            beep(330);
             break;
 
         case "f":
-            beep(500, 349);
+            beep(349);
             break;
 
         case "g":
-            beep(500, 392);
+            beep(392);
             break;
 
         case "h":
-            beep(500, 440);
+            beep(440);
             break;
 
         case "j":
-            beep(500, 494);
+            beep(494);
             break;
 
         case "k":
-            beep(500, 523);
+            beep(523);
             break;
 
         case "l":
-            beep(500, 587);
+            beep(587);
             break;
 
         case ";":
-            beep(500, 659);
+            beep(659);
             break;
 
     }

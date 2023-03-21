@@ -1,11 +1,18 @@
 /* content and items */
-#container {
-    height: 100vh;
-    background-color: papayawhip;
+body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: papayawhip;
+
+}
+
+#container {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
 
 .whiteKeys {
@@ -14,5 +21,17 @@
     border: 1px solid black;
     background-color: white;
     margin: 3px;
-    
+    border-radius: 3px;
+    box-shadow: 3px 3px gray;
+}
+
+.blackKeys {
+    height: 120px;
+    width: 40px;
+    background-color: black;
+    z-index: 10;
+}
+
+.whiteKeys:hover {
+    transform: scale(1.01);
 }
