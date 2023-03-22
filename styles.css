@@ -2,13 +2,14 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background-color: papayawhip;
 
 }
 
 #container {
+    margin-top: auto;
+    margin-bottom: auto;
     border: 1px solid red;
     display: flex;
     flex-direction: row;
@@ -23,15 +24,26 @@ body {
     margin: 3px;
     border-radius: 3px;
     box-shadow: 3px 3px gray;
+    position: relative;
 }
 
 .blackKeys {
+    position: absolute;
+    top: 0px;
+    left: 35px;
     height: 120px;
     width: 40px;
+    border-radius: 3px;
+    box-shadow: 1px 1px gray;
     background-color: black;
     z-index: 10;
+    color: white;
 }
 
 .whiteKeys:hover {
-    transform: scale(1.01);
+    /* transform: scale(1.01); */
+}
+
+.clicked {
+    background-color: green;
 }
