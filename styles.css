@@ -1,19 +1,32 @@
-/* content and items */
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
+    height: 99vh;
+    justify-content: space-around;
     align-items: center;
     background-color: papayawhip;
-
+    border: 3px solid green;
 }
 
-#container {
-    margin-top: auto;
-    margin-bottom: auto;
-    border: 1px solid red;
+#container { /* this holds the keyboard */
     display: flex;
+    border: 1px solid red;
     flex-direction: row;
-    position: relative;
+}
+
+#keymap { /* this shows the map for keys to notes */
+    height: 100px;
+    width: 400px;
+    border: 1px solid red;
+}
+
+.keys {
+    display: flex;
+    cursor: pointer;
+    align-items: flex-end;
+    border-radius: 3px;
+    box-shadow: 1px 2px gray;
 }
 
 .whiteKeys {
@@ -21,29 +34,38 @@ body {
     width: 50px;
     border: 1px solid black;
     background-color: white;
-    margin: 3px;
-    border-radius: 3px;
-    box-shadow: 3px 3px gray;
+    margin: 1px;
     position: relative;
 }
 
 .blackKeys {
-    position: absolute;
-    top: 0px;
-    left: 35px;
+    align-items: flex-end;
+    margin: 0 -20px 0 -20px;
     height: 120px;
     width: 40px;
-    border-radius: 3px;
-    box-shadow: 1px 1px gray;
     background-color: black;
-    z-index: 10;
+    z-index: 1;
     color: white;
 }
 
-.whiteKeys:hover {
-    /* transform: scale(1.01); */
+.keys:hover {
+    transform: scale(1.01);
 }
 
-.clicked {
-    background-color: green;
+.played {
+    transform: translateY(2px);
+    font-size: 1.5em;
+    text-transform: uppercase;
+    color: gray;
+    justify-content: center;
+}
+
+#testDiv {
+    display: none;
+    height: 50px;
+    width: 50px;
+    border: 3px solid red;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
