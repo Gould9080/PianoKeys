@@ -47,7 +47,9 @@ function beep(frequency, duration = 250, volume, type, callback) {
     oscillator.stop(audioCtx.currentTime + ((duration || 500) / 1000));
 };
 
+
 // for keydown / keyup response, not used yet
+/*
 function beepStart(frequency) {
     var oscillator = audioCtx.createOscillator();
     var gainNode = audioCtx.createGain();
@@ -56,7 +58,7 @@ function beepStart(frequency) {
     gainNode.connect(audioCtx.destination);
     oscillator.start(audioCtx.currentTime);
 };
-
+*/
 
 
 
@@ -64,7 +66,6 @@ function beepStart(frequency) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
 
     let keys = document.querySelectorAll('.keys');
     keys.forEach(k => {
@@ -76,34 +77,43 @@ document.addEventListener('DOMContentLoaded', () => {
             beep(frequency);
             event.target.classList.add('played');
             let noteName = target.id[0];
-            target.innerHTML = `${noteName}`   //target.id
+            // target.innerHTML = `${noteName}`   //target.id
         });
 
         k.addEventListener('mouseup', (event) => {
             let target = event.target;
             event.target.classList.remove('played');
-            target.innerHTML = originalText;
+            // target.innerHTML = originalText;
         });
     });
 
-    let originalText; // stores the value of the innerText
+
+    let notebox = document.getElementById('noteDisplayBox');
+    let keyMapBox = document.getElementById('keymap');
+
     document.addEventListener('keydown', function (event) {
         let note = setKeyToNote(event.key); // returns id of the Div
         let frequency = setFrequency(note);
         let notePlayed = document.getElementById(note); // actual Div
-        if (notePlayed) {
-            originalText = notePlayed.innerText;
-        }
+        let keyboardLetter;
+        let noteName;
         //console.log(event.key); <- actual key I am pressing
 
         if (frequency) {
+            keyboardLetter = notePlayed.firstElementChild
+            noteName = notePlayed.lastElementChild.innerHTML // hidden notes
             beep(frequency);
+            keyboardLetter.classList.toggle('hiddenNotes');
             notePlayed.classList.add('played');
-            if (notePlayed.classList.contains('blackKeys')) {
-                notePlayed.innerText = `${note[0]}#`
-            } else {
-                notePlayed.innerText = `${note[0]}`
-            }
+            console.log(noteName)
+
+            notebox.innerHTML = noteName;
+
+            // if (notePlayed.classList.contains('blackKeys')) {
+            //     notePlayed.innerText = `${note[0]}#`
+            // } else {
+            //     notePlayed.innerText = `${note[0]}`
+            // }
         }
     })
 
@@ -111,9 +121,16 @@ document.addEventListener('DOMContentLoaded', () => {
         let note = setKeyToNote(event.key);
         let frequency = setFrequency(note);
         let notePlayed = document.getElementById(note);
+        let keyboardLetter;
+        let noteName;
         if (frequency) {
+            keyboardLetter = notePlayed.firstElementChild
+            noteName = notePlayed.lastElementChild.innerHTML
+            keyboardLetter.classList.toggle('hiddenNotes');
             notePlayed.classList.remove('played');
-            notePlayed.innerHTML = originalText;
+
+            setTimeout(() => { notebox.innerHTML = ''; }, 200);
+
         }
     })
 
