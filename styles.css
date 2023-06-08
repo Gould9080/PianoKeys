@@ -9,13 +9,15 @@ body {
     border: 3px solid green;
 }
 
-#container { /* this holds the keyboard */
+#container {
+    /* this holds the keyboard */
     display: flex;
     border: 1px solid red;
     flex-direction: row;
 }
 
-#keymap { /* this shows the map for keys to notes */
+#keymap {
+    /* this shows the map for keys to notes */
     height: 100px;
     width: 400px;
     border: 1px solid red;
@@ -80,7 +82,6 @@ body {
     position: relative;
     bottom: 25%;
     left: 25%;
-
 }
 
 .played .fadeIn {
@@ -91,6 +92,20 @@ body {
 }
 
 #noteDisplayBox {
+    height: 4rem;
     color: red;
     font-size: 3rem;
+}
+
+.invisible {
+    display: none;
+}
+
+@media screen and (max-width: 900px) {
+
+    #keyboard-yn-box,
+    .extraKeys {
+        display: none;
+    }
+
 }

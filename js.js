@@ -62,18 +62,14 @@ function beepStart(frequency) {
 
 
 
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
     let keys = document.querySelectorAll('.keys');
     keys.forEach(k => {
         k.addEventListener('mousedown', (event) => {
             let target = event.target;
-            originalText = target.innerHTML;
+            //originalText = target.innerHTML;
             let frequency = setFrequency(target.id);
-            // console.log(target.id);
             beep(frequency);
             event.target.classList.add('played');
             let noteName = target.id[0];
@@ -81,15 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         k.addEventListener('mouseup', (event) => {
-            let target = event.target;
             event.target.classList.remove('played');
-            // target.innerHTML = originalText;
+            // event.target.innerHTML = originalText;
         });
     });
 
 
     let notebox = document.getElementById('noteDisplayBox');
-    let keyMapBox = document.getElementById('keymap');
+    //let keyMapBox = document.getElementById('keymap');
 
     document.addEventListener('keydown', function (event) {
         let note = setKeyToNote(event.key); // returns id of the Div
@@ -105,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             beep(frequency);
             keyboardLetter.classList.toggle('hiddenNotes');
             notePlayed.classList.add('played');
-            console.log(noteName)
+            //console.log(noteName)
 
             notebox.innerHTML = noteName;
 
@@ -130,9 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
             notePlayed.classList.remove('played');
 
             setTimeout(() => { notebox.innerHTML = ''; }, 200);
-
         }
     })
+
+    let inputSelector = document.getElementById('keyboard-yn');
+    let keyboardNotes = document.querySelectorAll('.keyboardNotes');
+    let extraKeys = document.querySelectorAll('.extraKeys');
+    keyboardNotes.forEach(k => k.classList.add('invisible'));
+
+    inputSelector.addEventListener('change', function () {
+        keyboardNotes.forEach(k => k.classList.toggle('invisible'));
+        extraKeys.forEach(k => k.classList.toggle('invisible'));
+    })
+
 
 });
 
@@ -232,7 +237,6 @@ function setKeyToNote(key) {
             return "e5"
     }
 }
-
 
 
 
