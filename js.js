@@ -63,27 +63,26 @@ function beepStart(frequency) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    let notebox = document.getElementById('noteDisplayBox');
 
     let keys = document.querySelectorAll('.keys');
     keys.forEach(k => {
         k.addEventListener('mousedown', (event) => {
-            let target = event.target;
-            //originalText = target.innerHTML;
-            let frequency = setFrequency(target.id);
+            let frequency = setFrequency(event.target.id);
             beep(frequency);
             event.target.classList.add('played');
-            let noteName = target.id[0];
-            // target.innerHTML = `${noteName}`   //target.id
+
+            let noteName = event.target.lastElementChild.innerHTML;
+            notebox.innerHTML = noteName;
         });
 
         k.addEventListener('mouseup', (event) => {
             event.target.classList.remove('played');
-            // event.target.innerHTML = originalText;
+            notebox.innerHTML = "";
         });
     });
 
 
-    let notebox = document.getElementById('noteDisplayBox');
     //let keyMapBox = document.getElementById('keymap');
 
     document.addEventListener('keydown', function (event) {
@@ -92,16 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let notePlayed = document.getElementById(note); // actual Div
         let keyboardLetter;
         let noteName;
-        //console.log(event.key); <- actual key I am pressing
+        //event.key <- actual key I am pressing
 
         if (frequency) {
             keyboardLetter = notePlayed.firstElementChild
-            noteName = notePlayed.lastElementChild.innerHTML // hidden notes
+            noteName = notePlayed.lastElementChild.innerHTML // references hidden notes
             beep(frequency);
             keyboardLetter.classList.toggle('hiddenNotes');
             notePlayed.classList.add('played');
-            //console.log(noteName)
-
             notebox.innerHTML = noteName;
 
             // if (notePlayed.classList.contains('blackKeys')) {

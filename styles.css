@@ -6,17 +6,16 @@ body {
     justify-content: space-around;
     align-items: center;
     background-color: papayawhip;
-    border: 3px solid green;
 }
 
 #container {
     /* this holds the keyboard */
     display: flex;
-    border: 1px solid red;
     flex-direction: row;
+    background-color: lightgray;
 }
 
-#keymap {
+#controls {
     /* this shows the map for keys to notes */
     height: 100px;
     width: 400px;
@@ -79,6 +78,7 @@ body {
 
 .hiddenNotes {
     opacity: 0;
+    display: none;
     position: relative;
     bottom: 25%;
     left: 25%;
@@ -100,6 +100,7 @@ body {
 .invisible {
     display: none;
 }
+
 
 @media screen and (max-width: 900px) {
 
