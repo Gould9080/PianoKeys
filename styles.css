@@ -92,13 +92,33 @@ body {
 }
 
 #noteDisplayBox {
-    height: 4rem;
+    height: 5rem;
     color: red;
-    font-size: 3rem;
+    font-size: 4rem;
+    font-weight: bold;
 }
 
 .invisible {
     display: none;
+}
+
+#keyboard-yn-box {
+
+
+    width: 6em;
+    border-radius: 5px;
+    padding: 1px;
+    background-color: rgb(246, 224, 195);
+}
+
+#keyboard-yn-box div {
+    margin-left: 4px;
+}
+
+
+#keyboard-yn {
+    border-radius: 5px;
+    width: 100%;
 }
 
 
